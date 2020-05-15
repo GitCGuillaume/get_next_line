@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 11:51:49 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/15 18:49:35 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/15 21:02:56 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-static size_t    ft_len(char *str)
+size_t    ft_len(char *str)
 {
     size_t i;
     
@@ -41,8 +41,8 @@ char            *ft_strjoin(char const *s1, char const *s2)
     char            *ptr;
     unsigned int    i;
     unsigned int    j;
-    
-    i = 0;
+
+	i = 0;
     j = 0;
     if (!s1 || !s2)
         return (NULL);
