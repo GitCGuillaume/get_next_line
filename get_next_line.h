@@ -5,6 +5,8 @@
 #include <unistd.h>
 
 int		get_next_line(int fd, char **line);
-char	*ft_strncpy(char *dest, char *src, int i);
+char	*ft_strcpy(char *dest, char *src);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
 
 #endif

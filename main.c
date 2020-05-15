@@ -34,6 +34,7 @@ int main(void)
 	if (!(line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
 		return (0);
 	fd = ft_open_fd();
+	printf("1\n");
 	get_next_line(fd, line);
 	//if (!)
 	//
