@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 14:02:07 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/15 21:05:53 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/16 13:20:13 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,19 @@
 #include <stdio.h>
 int		get_next_line(int fd, char **line)
 {
+	(void)line;
 	char	buff[BUFFER_SIZE + 1];
+	char	*tmp;
 	int		ret;
 
-	if (!(*line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
-		return (-1);
-	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
+	while (!ft_strchr(buff, '\n'))
 	{
-		printf("nb_char == %d", ret);
-		printf("%s", ft_strjoin(*line, buff));
-		if (ft_strchr(buff, '\n'))
-		{
-			buff[ret] = '\0';
-			printf("break");
-			break;
-		}
-		printf("size == %zu\n", ft_len(buff));
+		ret = read(fd, buff, BUFFER_SIZE);
+		buff[ret] = '\0';
+		if (!(tmp = malloc(sizeof(char) * ft_len(buff))))
+			return (-1);
+		tmp = ft_strcpy(tmp, buff);
+		printf("%s", tmp);
 	}
 	return (0);
-	}
+}
