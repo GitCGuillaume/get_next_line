@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 14:02:07 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/17 22:50:12 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/18 12:02:44 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int		read_line(int fd, char **line)
 {
-	char	buff[BUFFER_SIZE + 1];
-	char	*tmp;
-	int		ret;
-
+	static char	buff[BUFFER_SIZE + 1];
+	char		*tmp;
+	int			ret;
+	
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);
 	*line[0] = '\0';
@@ -29,19 +29,21 @@ int		read_line(int fd, char **line)
 		if (!(*line = ft_strjoin(tmp, buff)))
 			return (-1);
 		free(tmp);
-		printf("%s\n", *line);
-		printf("ret == %d\n", ret);
 		if (ft_strchr(buff, '\n'))
 			break;
 	}
+	if (ret == 0)
+		return (0);
 	return (1);
 }
 
 int		get_next_line(int fd, char **line)
 {
 	int		result;
-
+	//char	**static_line;
+	
+	if (BUFFER_SIZE < 1 || fd < 1 || !line)
+		return (-1);
 	result = read_line(fd, line);
-	printf("result == %d\n", result);
-	return (1);
+	return (result);
 }
