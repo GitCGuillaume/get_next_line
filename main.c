@@ -37,6 +37,7 @@ int main(void)
 	printf("\nfd == %d", fd);
 	get_next_line(fd, line);
 	get_next_line(fd, line);
+	get_next_line(fd, line);
 	printf("line == %s\n", *line);
 	if (fd != -1)
 		printf("ft_strcmp == %d", strcmp(*line, "hi"));

@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 14:02:07 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/19 15:07:16 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/19 18:39:01 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ int		read_line(int fd, char **line)
 	}
 	if (ret == 0)
 		return (0);
+	printf("in");
 	return (response);
 }
 
-int		remove_jump(char **line, char *static_line)
+int		get_last_n(char **line, char *static_line)
 {
 	size_t	i;
 
@@ -48,21 +49,24 @@ int		remove_jump(char **line, char *static_line)
 	static_line = ft_strdup(*line);
 	free(*line);
 	*line = static_line;
+	printf("static == %p\n", static_line);
 	return (1);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	int		result;
-	char	*static_line;
-
+	int			result;
+	static char	*static_line;
+	
+	result = -1;
+	printf("static line == %s\n", static_line);
 	if (BUFFER_SIZE < 1 || fd <= 0 || !line)
 		return (-1);
-	static_line = NULL;
-	result = read_line(fd, line);
+	if (!static_line)
+		result = read_line(fd, line);
 	printf("line1== %s\n", *line);
 	if (result != -1 && fd != -1 && *line)
-		remove_jump(line, static_line);
-	printf("line2== %s\n", *line);
+		get_last_n(line, static_line);
+	printf("line2== %p\n", static_line);
 	return (result);
 }
