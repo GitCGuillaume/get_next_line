@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 14:02:07 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/19 18:39:01 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/19 20:18:18 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,14 @@ int		read_line(int fd, char **line)
 	return (response);
 }
 
-int		get_last_n(char **line, char *static_line)
+int		get_last_n(char **line, char **static_line)
 {
 	size_t	i;
 
 	i = 0;
-	static_line = ft_strdup(*line);
+	*static_line = ft_strdup(*line);
 	free(*line);
-	*line = static_line;
-	printf("static == %p\n", static_line);
+	*line = *static_line;
 	return (1);
 }
 
@@ -66,7 +65,7 @@ int		get_next_line(int fd, char **line)
 		result = read_line(fd, line);
 	printf("line1== %s\n", *line);
 	if (result != -1 && fd != -1 && *line)
-		get_last_n(line, static_line);
-	printf("line2== %p\n", static_line);
+		get_last_n(line, &static_line);
+	printf("line2== %s\n", static_line);
 	return (result);
 }
