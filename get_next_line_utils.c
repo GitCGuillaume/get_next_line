@@ -6,25 +6,11 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 11:51:49 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/16 11:56:25 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/19 11:32:42 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_strcpy(char *dest, char *src)
-{
-	unsigned int i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
 
 size_t    ft_len(char *str)
 {
@@ -36,7 +22,24 @@ size_t    ft_len(char *str)
     return (i);
 }
 
-char            *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strdup(const char *s1)
+{
+	char	*ptr_char;
+	size_t	i;
+
+	i = 0;
+	if (!(ptr_char = malloc(ft_len((char *)s1) + 1)))
+		return (NULL);
+	while (s1[i] != '\0' && s1[i] != '\n')
+	{
+		*(ptr_char + i) = s1[i];
+		i++;
+	}
+	*(ptr_char + i) = '\0';
+	return (ptr_char);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
 {
     char            *ptr;
     unsigned int    i;
@@ -49,12 +52,12 @@ char            *ft_strjoin(char const *s1, char const *s2)
     if (!(ptr = malloc((sizeof(char const *) * ft_len((char *)s1))
                        + (sizeof(char const *) * ft_len((char *)s2)) + 1)))
         return (NULL);
-    while (s1[i] != '\0')
+    while (s1[i])
     {
         ptr[i] = (char)s1[i];
         i++;
     }
-    while (s2[j] != '\0')
+    while (s2[j])
     {
         ptr[i] = (char)s2[j];
         i++;
