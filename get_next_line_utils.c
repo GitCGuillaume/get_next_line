@@ -6,13 +6,13 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 11:51:49 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/19 11:32:42 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/20 17:07:50 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t    ft_len(char *str)
+size_t    ft_len(char const *str)
 {
     size_t i;
     
@@ -65,6 +65,31 @@ char	*ft_strjoin(char const *s1, char const *s2)
     }
     ptr[i] = '\0';
     return (ptr);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*ptr;
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	if (!(ptr = malloc((sizeof(char) * len) + 1)))
+		return (NULL);
+	if (ft_len(s) < start)
+	{
+		ptr[i] = '\0';
+		return (ptr);
+	}
+	while (len > i && s[start] != '\0')
+	{
+		ptr[i] = (char)s[start];
+		start++;
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }
 
 char	*ft_strchr(const char *s, int c)
