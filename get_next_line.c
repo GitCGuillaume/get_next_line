@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 14:02:07 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/20 11:26:44 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/20 13:46:04 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ int		read_line(int fd, char **line)
 		buff[ret] = '\0';
 		if (!(tmp = ft_strjoin(*line, buff)))
 			return (-1);
+		printf("tmp == %s\n", tmp);
 		free(*line);
 		*line = tmp;
+		printf("buff == %s\n", buff);
 		if (ft_strchr(buff, '\n'))
 			break;
 	}
