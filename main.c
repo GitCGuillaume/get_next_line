@@ -28,13 +28,11 @@ int main(void)
 	//static int buffer = BUFFER_SIZE;
 	char **line;
 	int fd;
-
 	if (!(line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
 		return (0);
 	fd = ft_open_fd();
 	//while (get_next_line(fd, line))
 	//	printf("%s", *line);
-	printf("\nfd == %d", fd);
 	get_next_line(fd, line);
 	get_next_line(fd, line);
 	get_next_line(fd, line);

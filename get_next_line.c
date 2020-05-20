@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 14:02:07 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/20 19:22:39 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/20 21:03:28 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@ int		get_last_n(char **line, char **static_line)
 	char	*tmp;
 
 	i = 0;
-	while ((*line)[i] != '\0' && (*line)[i] != '\n')
+	while ((*line)[i] != '\n' && (*line)[i] != '\0')
 		i++;
-	printf("i == %zu\n", i);
-	printf("ft_len == %zu", ft_len(*line));
+	while ((*line)[i] == '\n')
+		i++;
+	printf("i == %zu", i);
 	*static_line = ft_substr(*line, i, ft_len(*line));
+	printf("static final == %s", *static_line);
+	printf("size == %zu", ft_len(*static_line));
 	tmp = ft_strdup(*line);
 	free(*line);
 	*line = tmp;
@@ -61,17 +64,15 @@ int		get_next_line(int fd, char **line)
 {
 	int			result;
 	static char	*static_line;
-	
 	result = -1;
 	if (BUFFER_SIZE < 1 || fd <= 0 || !line)
 		return (-1);
-	//if (static_line > 0 && fd != -1)
-	//	free(*line);
-	if (!static_line && ft_len(static_line) == 0)
+//	if (static_line > 0 && fd != -1)
+//		free(*line);
+	if (!static_line || ft_len(static_line) == 0)
 		result = read_line(fd, line);
 	if (result != -1 && fd != -1 && *line)
 		get_last_n(line, &static_line);
-	printf("*line == %s\n", *line);
-	printf("static final == %s\n", static_line);
+	printf("*line == %s", *line);
 	return (result);
 }
