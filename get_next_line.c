@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 14:02:07 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/20 18:07:02 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/20 19:22:39 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,13 @@ int		get_next_line(int fd, char **line)
 	result = -1;
 	if (BUFFER_SIZE < 1 || fd <= 0 || !line)
 		return (-1);
-	/*if (static_line > 0 && fd != -1)
-	{
-		free(*line);
-		*line = static_line;
-	}*/
-	result = read_line(fd, line);
+	//if (static_line > 0 && fd != -1)
+	//	free(*line);
+	if (!static_line && ft_len(static_line) == 0)
+		result = read_line(fd, line);
 	if (result != -1 && fd != -1 && *line)
 		get_last_n(line, &static_line);
-	printf("*line final == %s\n", *line);
+	printf("*line == %s\n", *line);
+	printf("static final == %s\n", static_line);
 	return (result);
 }
