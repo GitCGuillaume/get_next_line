@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 14:02:07 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/20 21:03:28 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/21 12:15:03 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int		read_line(int fd, char **line)
 	char		*tmp;
 	int			ret;
 	int			response;
-
 	response = -1;
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);
@@ -44,16 +43,12 @@ int		get_last_n(char **line, char **static_line)
 {
 	size_t	i;
 	char	*tmp;
-
 	i = 0;
 	while ((*line)[i] != '\n' && (*line)[i] != '\0')
 		i++;
 	while ((*line)[i] == '\n')
 		i++;
-	printf("i == %zu", i);
 	*static_line = ft_substr(*line, i, ft_len(*line));
-	printf("static final == %s", *static_line);
-	printf("size == %zu", ft_len(*static_line));
 	tmp = ft_strdup(*line);
 	free(*line);
 	*line = tmp;
@@ -67,12 +62,13 @@ int		get_next_line(int fd, char **line)
 	result = -1;
 	if (BUFFER_SIZE < 1 || fd <= 0 || !line)
 		return (-1);
-//	if (static_line > 0 && fd != -1)
-//		free(*line);
-	if (!static_line || ft_len(static_line) == 0)
+	//if (static_line > 0 && fd != -1)
+	//	free(*line);
+	if (!static_line || static_line[0] == 0)
 		result = read_line(fd, line);
-	if (result != -1 && fd != -1 && *line)
-		get_last_n(line, &static_line);
-	printf("*line == %s", *line);
+	else
+		result = 0;
+	if (result > 0 && fd != -1 && *line)
+		result = get_last_n(line, &static_line);
 	return (result);
 }
