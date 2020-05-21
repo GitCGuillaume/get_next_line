@@ -27,18 +27,27 @@ int main(void)
 	//placer macro dans get_next_line.h
 	//static int buffer = BUFFER_SIZE;
 	char **line;
+	int ret;
 	int fd;
+
+	ret = 1;
 	if (!(line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
 		return (0);
 	fd = ft_open_fd();
-	//while (get_next_line(fd, line))
-	//	printf("%s", *line);
-	get_next_line(fd, line);
-	get_next_line(fd, line);
-	get_next_line(fd, line);
-	get_next_line(fd, line);
+	while (ret != 0)
+	{
+		ret = get_next_line(fd, line);
+		printf("%s", *line);
+		printf("\n");
+	}
+	//get_next_line(fd, line);
+	//get_next_line(fd, line);
+	//get_next_line(fd, line);
+//	get_next_line(fd, line);
+//	get_next_line(fd, line);
+//	get_next_line(fd, line);
 	if (fd != -1)
-		printf("ft_strcmp == %d", strcmp(*line, "hi"));
+		printf("ft_strcmp == %d", strcmp(*line, "abcd"));
 	ft_close_fd(fd);
 	free(line);
 	return (0);

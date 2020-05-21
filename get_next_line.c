@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 14:02:07 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/21 12:15:03 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/21 21:19:06 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ int		read_line(int fd, char **line)
 	char		*tmp;
 	int			ret;
 	int			response;
+	
 	response = -1;
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);
 	*line[0] = '\0';
-	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
+	while ((ret = read(fd, buff, BUFFER_SIZE)))
 	{
 		response = 1;
 		buff[ret] = '\0';
@@ -39,36 +40,71 @@ int		read_line(int fd, char **line)
 	return (response);
 }
 
-int		get_last_n(char **line, char **static_line)
+int		length_line(char *str, int *result)
 {
 	size_t	i;
-	char	*tmp;
+
 	i = 0;
-	while ((*line)[i] != '\n' && (*line)[i] != '\0')
+	while (str[i] != '\n' && str[i] != '\0')
 		i++;
-	while ((*line)[i] == '\n')
+	if (str[i] == '\n')
+	{
 		i++;
-	*static_line = ft_substr(*line, i, ft_len(*line));
-	tmp = ft_strdup(*line);
+		*result = 1;
+	}
+	//else if (str[i] == '\0')
+	//	*result = 0;
+	return (i);
+}
+
+void	get_last_n(char **line, char **static_line, int *result)
+{
+	static int a_delete = 0;
+	size_t	i;
+	char	*tmp;
+	
+	i = 0;
+	if (!*static_line || (*static_line)[0] == '\0')
+		i = length_line(*line, result);
+	else
+		i = length_line(*static_line, result);
+	/*while ((*line)[i] != '\n' && (*line)[i] != '\0')
+		i++;
+	if ((*line)[i] == '\n')
+		i++;
+	*/
+	if (!*static_line || (*static_line)[0] == '\0')
+		*static_line = ft_substr(*line, 0, ft_len(*line));
+	else
+	{
+		free(*static_line);
+		*static_line = ft_substr(*static_line, 0, ft_len(*static_line));
+	}
+	printf("static_line == %s----\n", *static_line);
+	if (!(tmp = ft_strdup(*static_line)))
+		*result = -1;
+	*static_line = ft_substr(*static_line, i, ft_len(*static_line));
 	free(*line);
 	*line = tmp;
-	return (1);
+	a_delete +=1;
 }
 
 int		get_next_line(int fd, char **line)
 {
 	int			result;
 	static char	*static_line;
+	
 	result = -1;
 	if (BUFFER_SIZE < 1 || fd <= 0 || !line)
 		return (-1);
 	//if (static_line > 0 && fd != -1)
+	//{
+	//	printf("coucou\n");
 	//	free(*line);
+	//}
 	if (!static_line || static_line[0] == 0)
 		result = read_line(fd, line);
-	else
-		result = 0;
-	if (result > 0 && fd != -1 && *line)
-		result = get_last_n(line, &static_line);
+	if (fd != -1 && BUFFER_SIZE >= 1)
+		get_last_n(line, &static_line, &result);
 	return (result);
 }
