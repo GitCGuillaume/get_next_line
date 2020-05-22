@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 14:02:07 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/21 21:19:06 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/22 10:41:12 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,34 +59,31 @@ int		length_line(char *str, int *result)
 
 void	get_last_n(char **line, char **static_line, int *result)
 {
-	static int a_delete = 0;
 	size_t	i;
 	char	*tmp;
-	
+	char	*tmp_static;
+
 	i = 0;
 	if (!*static_line || (*static_line)[0] == '\0')
 		i = length_line(*line, result);
 	else
 		i = length_line(*static_line, result);
-	/*while ((*line)[i] != '\n' && (*line)[i] != '\0')
-		i++;
-	if ((*line)[i] == '\n')
-		i++;
-	*/
 	if (!*static_line || (*static_line)[0] == '\0')
 		*static_line = ft_substr(*line, 0, ft_len(*line));
 	else
 	{
+		tmp_static = ft_substr(*static_line, 0, ft_len(*static_line));
 		free(*static_line);
-		*static_line = ft_substr(*static_line, 0, ft_len(*static_line));
+		*static_line = tmp_static;
 	}
-	printf("static_line == %s----\n", *static_line);
+	printf("static_line == %s\n", *static_line);
 	if (!(tmp = ft_strdup(*static_line)))
 		*result = -1;
-	*static_line = ft_substr(*static_line, i, ft_len(*static_line));
+	if (!(*static_line = ft_substr(*static_line, i, ft_len(*static_line))))
+		*result = -1;
 	free(*line);
 	*line = tmp;
-	a_delete +=1;
+	printf("line == %s", *line);
 }
 
 int		get_next_line(int fd, char **line)

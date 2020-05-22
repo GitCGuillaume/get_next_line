@@ -37,8 +37,8 @@ int main(void)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, line);
-		printf("%s", *line);
-		printf("\n");
+		printf("\n%s", *line);
+		printf("\n---\n");
 	}
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
