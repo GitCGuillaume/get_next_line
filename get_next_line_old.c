@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 14:02:07 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/22 10:41:12 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/22 15:05:43 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		read_line(int fd, char **line)
 {
+	printf("hi");
 	char		buff[BUFFER_SIZE + 1];
 	char		*tmp;
 	int			ret;
@@ -57,7 +58,7 @@ int		length_line(char *str, int *result)
 	return (i);
 }
 
-void	get_last_n(char **line, char **static_line, int *result)
+void	static_process(char **line, char **static_line, int *result)
 {
 	size_t	i;
 	char	*tmp;
@@ -85,6 +86,11 @@ void	get_last_n(char **line, char **static_line, int *result)
 	*line = tmp;
 	printf("line == %s", *line);
 }
+/*
+int		get_n(char **line)
+{
+
+}*/
 
 int		get_next_line(int fd, char **line)
 {
@@ -92,16 +98,18 @@ int		get_next_line(int fd, char **line)
 	static char	*static_line;
 	
 	result = -1;
+	if (!static_line)
+		static_line = NULL;
 	if (BUFFER_SIZE < 1 || fd <= 0 || !line)
 		return (-1);
-	//if (static_line > 0 && fd != -1)
+	//if (fd != -1 && BUFFER_SIZE >= 1 && static_line != 0)
 	//{
-	//	printf("coucou\n");
-	//	free(*line);
+	//	return (0);
 	//}
+	//get_last_n(line, &static_line, &result);
 	if (!static_line || static_line[0] == 0)
 		result = read_line(fd, line);
 	if (fd != -1 && BUFFER_SIZE >= 1)
-		get_last_n(line, &static_line, &result);
+		static_process(line, &static_line, &result);
 	return (result);
 }
