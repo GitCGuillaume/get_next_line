@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 08:51:48 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/25 14:56:02 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/25 18:07:35 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,7 @@ int		get_next_line(int fd, char **line)
 				|| static_line == NULL))
 		result = read_line(fd, line);
 	else
-	{
 		process_static(line, &static_line, fd, &result);
-	}
 	if (fd != -1 && BUFFER_SIZE >= 1 && result >= 0)
 		result = get_last_n(line, &static_line, &result);
 	return (result);
