@@ -37,8 +37,8 @@ int main(void)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, line);
-		printf("\n%s", *line);
-		printf("\n---\n");
+		//printf("%s", *line);
+		printf("%d %s\n", ret, *line);
 	}
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
@@ -47,7 +47,7 @@ int main(void)
 //	get_next_line(fd, line);
 //	get_next_line(fd, line);
 	if (fd != -1)
-		printf("ft_strcmp == %d", strcmp(*line, "abcd"));
+		printf("ft_strcmp == %d", strcmp("abcd\n", "abcd"));
 	ft_close_fd(fd);
 	free(line);
 	return (0);
