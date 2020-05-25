@@ -39,6 +39,8 @@ int main(void)
 		ret = get_next_line(fd, line);
 		//printf("%s", *line);
 		printf("%d %s\n", ret, *line);
+		//printf("ft_strcmp == %d\n", strcmp(*line, "abcdefgh"));
+		//printf("ft_strcmp == %d\n", strcmp(*line, "ijklmnop"));
 	}
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
@@ -46,8 +48,7 @@ int main(void)
 //	get_next_line(fd, line);
 //	get_next_line(fd, line);
 //	get_next_line(fd, line);
-	if (fd != -1)
-		printf("ft_strcmp == %d", strcmp("abcd\n", "abcd"));
+	//if (fd != -1)
 	ft_close_fd(fd);
 	free(line);
 	return (0);

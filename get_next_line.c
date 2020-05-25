@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 08:51:48 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/25 12:32:00 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/25 14:56:02 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		read_line(int fd, char **line)
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);
 	*line[0] = '\0';
-	while ((ret = read(fd, buff, BUFFER_SIZE)))
+	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
 		response = 1;
 		buff[ret] = '\0';
@@ -87,11 +87,12 @@ int		get_last_n(char **line, char **static_line, int *result)
 int		process_static(char **line, char **static_line, int fd, int *result)
 {
 	char	*tmp;
+	
 	*result = read_line(fd, line);
 	if (!(tmp = ft_strjoin(*static_line, *line)))
 		return (*result = -1);
-	free(*line);
-	*line = tmp;
+	free(*static_line);
+	*static_line = tmp;
 	return (*result);
 }
 
@@ -105,10 +106,13 @@ int		get_next_line(int fd, char **line)
 		return (-1);
 	if (!static_line)
 		static_line = NULL;
-	if (fd != -1 || !static_line || static_line[0] == 0)
+	if (fd != -1 && (!static_line || static_line[0] == 0
+				|| static_line == NULL))
 		result = read_line(fd, line);
 	else
+	{
 		process_static(line, &static_line, fd, &result);
+	}
 	if (fd != -1 && BUFFER_SIZE >= 1 && result >= 0)
 		result = get_last_n(line, &static_line, &result);
 	return (result);
