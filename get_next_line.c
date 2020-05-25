@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 08:51:48 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/25 18:07:35 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/25 20:27:31 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ int		process_static(char **line, char **static_line, int fd, int *result)
 	
 	*result = read_line(fd, line);
 	if (!(tmp = ft_strjoin(*static_line, *line)))
+	{
+		free(*line);
 		return (*result = -1);
+	}
 	free(*static_line);
 	*static_line = tmp;
 	return (*result);
@@ -103,14 +106,19 @@ int		get_next_line(int fd, char **line)
 
 	result = -1;
 	if (BUFFER_SIZE < 1 || fd <= 0 || !line)
+	{
 		return (-1);
+	}
 	if (!static_line)
+	{
 		static_line = NULL;
+		free(*line);
+	}	
 	if (fd != -1 && (!static_line || static_line[0] == 0
 				|| static_line == NULL))
 		result = read_line(fd, line);
 	else
-		process_static(line, &static_line, fd, &result);
+		result = process_static(line, &static_line, fd, &result);
 	if (fd != -1 && BUFFER_SIZE >= 1 && result >= 0)
 		result = get_last_n(line, &static_line, &result);
 	return (result);

@@ -43,6 +43,7 @@ int main(void)
 	close(p[1]);
 	dup2(out, fd);
 	get_next_line(p[0], &line);
+	printf("l == %s\n", line);
 	printf("strcmp1 == %d\n", strcmp(line, "efghijkl"));
 	//free(line);
 	//ret = get_next_line(p[0], &line);
