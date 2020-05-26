@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 08:51:48 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/25 20:27:31 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/26 10:15:03 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		get_last_n(char **line, char **static_line, int *result)
 	return (*result);
 }
 
-int		process_static(char **line, char **static_line, int fd, int *result)
+/*int		process_static(char **line, char **static_line, int fd, int *result)
 {
 	char	*tmp;
 	
@@ -97,29 +97,29 @@ int		process_static(char **line, char **static_line, int fd, int *result)
 	free(*static_line);
 	*static_line = tmp;
 	return (*result);
-}
+}*/
 
 int		get_next_line(int fd, char **line)
 {
 	int			result;
-	static char *static_line;
+	static char *mem_line;
+	char		*tmp;
 
 	result = -1;
 	if (BUFFER_SIZE < 1 || fd <= 0 || !line)
-	{
 		return (-1);
-	}
-	if (!static_line)
-	{
-		static_line = NULL;
-		free(*line);
-	}	
-	if (fd != -1 && (!static_line || static_line[0] == 0
-				|| static_line == NULL))
+	if (fd != -1 && (!mem_line || mem_line[0] == 0 || mem_line == NULL))
 		result = read_line(fd, line);
 	else
-		result = process_static(line, &static_line, fd, &result);
+	{
+		result = read_line(fd, line);
+		if (!(tmp = ft_strjoin(mem_line, *line)))
+		{
+			free(*line);
+			return (result = -1);
+		}
+	}
 	if (fd != -1 && BUFFER_SIZE >= 1 && result >= 0)
-		result = get_last_n(line, &static_line, &result);
+		result = get_last_n(line, &mem_line, &result);
 	return (result);
 }
