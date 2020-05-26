@@ -26,11 +26,11 @@ int main(void)
 {
 	//placer macro dans get_next_line.h
 	//static int buffer = BUFFER_SIZE;
-	char *line;
-	//int ret;
+	char **line;
+	int ret;
 	int fd;
 
-	int out;
+	/*int out;
 	int p[2];
 
 	//ret = 1;
@@ -48,22 +48,16 @@ int main(void)
 	//free(line);
 	//ret = get_next_line(p[0], &line);
 	free(line);
-	//printf("ret == %d\n", ret);
-	/*if (!(line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
+	*///printf("ret == %d\n", ret);
+	ret = 1;
+	if (!(line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
 		return (0);
-	*///fd = ft_open_fd();
-	/*while (ret != 0)
+	fd = ft_open_fd();
+	while (ret != 0)
 	{
 		ret = get_next_line(fd, line);
 		printf("%d %s\n", ret, *line);
-		printf("ft_strcmp == %d\n", strcmp(*line, "abcd"));
-		printf("ft_strcmp == %d\n", strcmp(*line, "efgh"));
-		printf("ft_strcmp == %d\n", strcmp(*line, "ijkl"));
-		printf("ft_strcmp == %d\n", strcmp(*line, "mnop"));
-		printf("ft_strcmp == %d\n", strcmp(*line, "qrst"));
-		printf("ft_strcmp == %d\n", strcmp(*line, "uvwx"));
-		printf("ft_strcmp == %d\n", strcmp(*line, "yzab"));
-	}*/
+	}
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
@@ -72,6 +66,6 @@ int main(void)
 //	get_next_line(fd, line);
 	//if (fd != -1)
 	ft_close_fd(fd);
-	//free(line);
+	free(line);
 	return (0);
 }
