@@ -46,7 +46,7 @@ int		read_line(int fd, char **line)
 		free(*line);
 		*line = tmp;
 		if (ft_strchr(buff, '\n'))
-			break;
+			break ;
 	}
 	if (ret == 0)
 		return (response = 0);
@@ -76,11 +76,10 @@ int		get_last_n(char **line, char **static_line, int *result)
 
 	i = 0;
 	if (!*static_line || (*static_line)[0] == '\0')
-		i = length_line(*line, result);
-	else
-		i = length_line(*static_line, result);
-	if (!*static_line || (*static_line)[0] == '\0')
-		*static_line = ft_substr(*line, 0, ft_len(*line));
+	{
+		if (!(*static_line = ft_substr(*line, 0, ft_len(*line))))
+			return (*result = clear_memory(static_line));
+	}
 	else
 	{
 		if (!(tmp_static = ft_substr(*static_line, 0, ft_len(*static_line))))
@@ -90,14 +89,13 @@ int		get_last_n(char **line, char **static_line, int *result)
 	}
 	if (!(tmp = ft_strdup(*static_line)))
 		return (*result = clear_memory(static_line));
-	if (!(*static_line = ft_substr(*static_line, i, ft_len(*static_line))))
+	if (!(*static_line = ft_substr(*static_line,
+					length_line(*static_line, result), ft_len(*static_line))))
 		return (*result = clear_memory(static_line));
 	free(*line);
 	*line = tmp;
 	return (*result);
 }
-
-
 
 int		get_next_line(int fd, char **line)
 {
@@ -116,9 +114,7 @@ int		get_next_line(int fd, char **line)
 	{
 		result = read_line(fd, line);
 		if (!(tmp = ft_strjoin(mem_line, *line)))
-		{
 			return (result = clear_memory(line));
-		}
 		free(mem_line);
 		mem_line = tmp;
 	}
