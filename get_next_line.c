@@ -42,9 +42,7 @@ int		read_line(int fd, char **line)
 		response = 1;
 		buff[ret] = '\0';
 		if (!(tmp = ft_strjoin(*line, buff)))
-		{
 			return (clear_memory(line));
-		}
 		free(*line);
 		*line = tmp;
 		if (ft_strchr(buff, '\n'))
@@ -86,14 +84,14 @@ int		get_last_n(char **line, char **static_line, int *result)
 	else
 	{
 		if (!(tmp_static = ft_substr(*static_line, 0, ft_len(*static_line))))
-			return (*result = clear_memory(line));
+			return (*result = clear_memory(static_line));
 		free(*static_line);
 		*static_line = tmp_static;
 	}
 	if (!(tmp = ft_strdup(*static_line)))
-		return (*result = clear_memory(line));
+		return (*result = clear_memory(static_line));
 	if (!(*static_line = ft_substr(*static_line, i, ft_len(*static_line))))
-		return (*result = clear_memory(line));
+		return (*result = clear_memory(static_line));
 	free(*line);
 	*line = tmp;
 	return (*result);
@@ -119,13 +117,13 @@ int		get_next_line(int fd, char **line)
 		result = read_line(fd, line);
 		if (!(tmp = ft_strjoin(mem_line, *line)))
 		{
-			//free(*line);
 			return (result = clear_memory(line));
 		}
 		free(mem_line);
 		mem_line = tmp;
 	}
 	if (fd != -1 && BUFFER_SIZE >= 1 && result >= 0)
-		result = get_last_n(line, &mem_line, &result);
+		if ((result = get_last_n(line, &mem_line, &result)) == -1)
+			clear_memory(line);
 	return (result);
 }
