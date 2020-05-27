@@ -56,7 +56,7 @@ int main(void)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, line);
-		printf("%d %s\n", ret, *line);
+		printf("%s %d", *line, ret);
 	}
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);

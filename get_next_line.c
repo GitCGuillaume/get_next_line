@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 08:51:48 by gchopin           #+#    #+#             */
-/*   Updated: 2020/05/26 11:24:27 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/05/27 11:54:55 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,20 @@ int		get_last_n(char **line, char **static_line, int *result)
 		free(*static_line);
 		*static_line = tmp_static;
 	}
+	/*int j=0;
+	while ((*static_line)[j])
+	{
+		printf("?=%d", (*static_line)[j]);
+		printf("j=%d\n", j);
+		j++;
+	}*/
 	if (!(tmp = ft_strdup(*static_line)))
 		return (*result = -1);
 	if (!(*static_line = ft_substr(*static_line, i, ft_len(*static_line))))
 		return (*result = -1);
 	free(*line);
 	*line = tmp;
+	//printf("static==%s\n", *static_line);
 	return (*result);
 }
 
@@ -108,16 +116,23 @@ int		get_next_line(int fd, char **line)
 	result = -1;
 	if (BUFFER_SIZE < 1 || fd <= 0 || !line)
 		return (-1);
+	if (!mem_line)
+		mem_line = NULL;
+	//printf("mem_line == %s", mem_line);
 	if (fd != -1 && (!mem_line || mem_line[0] == 0 || mem_line == NULL))
 		result = read_line(fd, line);
 	else
 	{
 		result = read_line(fd, line);
+		//printf("mem_line=%s\n", mem_line);
 		if (!(tmp = ft_strjoin(mem_line, *line)))
 		{
 			free(*line);
 			return (result = -1);
 		}
+		//printf("tmp==%s\n", tmp);
+		free(mem_line);
+		mem_line = tmp;
 	}
 	if (fd != -1 && BUFFER_SIZE >= 1 && result >= 0)
 		result = get_last_n(line, &mem_line, &result);
