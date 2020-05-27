@@ -13,6 +13,19 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
+int		clear_memory(char **str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	return (-1);
+}
+
 int		read_line(int fd, char **line)
 {
 	char	buff[BUFFER_SIZE + 1];
@@ -29,7 +42,9 @@ int		read_line(int fd, char **line)
 		response = 1;
 		buff[ret] = '\0';
 		if (!(tmp = ft_strjoin(*line, buff)))
-			return (-1);
+		{
+			return (clear_memory(line));
+		}
 		free(*line);
 		*line = tmp;
 		if (ft_strchr(buff, '\n'))
@@ -71,41 +86,20 @@ int		get_last_n(char **line, char **static_line, int *result)
 	else
 	{
 		if (!(tmp_static = ft_substr(*static_line, 0, ft_len(*static_line))))
-			return (*result = -1);
+			return (*result = clear_memory(line));
 		free(*static_line);
 		*static_line = tmp_static;
 	}
-	/*int j=0;
-	while ((*static_line)[j])
-	{
-		printf("?=%d", (*static_line)[j]);
-		printf("j=%d\n", j);
-		j++;
-	}*/
 	if (!(tmp = ft_strdup(*static_line)))
-		return (*result = -1);
+		return (*result = clear_memory(line));
 	if (!(*static_line = ft_substr(*static_line, i, ft_len(*static_line))))
-		return (*result = -1);
+		return (*result = clear_memory(line));
 	free(*line);
 	*line = tmp;
-	//printf("static==%s\n", *static_line);
 	return (*result);
 }
 
-/*int		process_static(char **line, char **static_line, int fd, int *result)
-{
-	char	*tmp;
-	
-	*result = read_line(fd, line);
-	if (!(tmp = ft_strjoin(*static_line, *line)))
-	{
-		free(*line);
-		return (*result = -1);
-	}
-	free(*static_line);
-	*static_line = tmp;
-	return (*result);
-}*/
+
 
 int		get_next_line(int fd, char **line)
 {
@@ -118,19 +112,16 @@ int		get_next_line(int fd, char **line)
 		return (-1);
 	if (!mem_line)
 		mem_line = NULL;
-	//printf("mem_line == %s", mem_line);
 	if (fd != -1 && (!mem_line || mem_line[0] == 0 || mem_line == NULL))
 		result = read_line(fd, line);
 	else
 	{
 		result = read_line(fd, line);
-		//printf("mem_line=%s\n", mem_line);
 		if (!(tmp = ft_strjoin(mem_line, *line)))
 		{
-			free(*line);
-			return (result = -1);
+			//free(*line);
+			return (result = clear_memory(line));
 		}
-		//printf("tmp==%s\n", tmp);
 		free(mem_line);
 		mem_line = tmp;
 	}
