@@ -114,12 +114,15 @@ int		get_next_line(int fd, char **line)
 	{
 		result = read_line(fd, line);
 		if (!(tmp = ft_strjoin(mem_line, *line)))
-			return (result = clear_memory(line));
+			return (result = clear_memory(&mem_line));
 		free(mem_line);
 		mem_line = tmp;
 	}
 	if (fd != -1 && BUFFER_SIZE >= 1 && result >= 0)
 		if ((result = get_last_n(line, &mem_line, &result)) == -1)
 			clear_memory(line);
+	printf("mem=%d", mem_line[0]);
+	if (!(*line)[0] && mem_line[0] != 0)
+		clear_memory(&mem_line);
 	return (result);
 }
