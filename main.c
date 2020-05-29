@@ -5,7 +5,7 @@
 int		ft_open_fd(void)
 {
 	int fd;
-	fd = open("43.txt", O_APPEND | S_IRWXU);
+	fd = open("42", O_APPEND | S_IRWXU);
 	if (fd == -1)
 	{
 		printf("L'ouverture n'a pu se faire, vérifiez si fichier existe ou les droits");
@@ -24,7 +24,7 @@ int		ft_close_fd(int fd)
 #include <string.h>
 int main(void)
 {
-char 	*line;
+	/*char 	*line;
 	int		out;
 	int		p[2];
 	char 	*str;
@@ -44,11 +44,11 @@ char 	*line;
 	get_next_line(p[0], &line);
 	printf("%d", strcmp(line, str));
 	free(line);
-	free(str);
+	free(str);*/
 	//placer macro dans get_next_line.h
 	//static int buffer = BUFFER_SIZE;
-	//char **line;
-	//int ret;
+	char **line;
+	int ret;
 	//int fd;
 
 	/*int out;
@@ -70,7 +70,8 @@ char 	*line;
 	//ret = get_next_line(p[0], &line);
 	free(line);
 	*///printf("ret == %d\n", ret);
-	/*ret = 1;
+	ret = 1;
+	int fd;
 	if (!(line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
 		return (0);
 	fd = ft_open_fd();
@@ -78,7 +79,7 @@ char 	*line;
 	{
 		ret = get_next_line(fd, line);
 		printf("%s %d", *line, ret);
-	}*/
+	}
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
@@ -87,6 +88,6 @@ char 	*line;
 //	get_next_line(fd, line);
 	//if (fd != -1)
 	//ft_close_fd(fd);
-	//free(line);
+	free(line);
 	return (0);
 }
