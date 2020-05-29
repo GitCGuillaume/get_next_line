@@ -75,11 +75,14 @@ int main(void)
 	if (!(line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
 		return (0);
 	fd = ft_open_fd();
-	while (ret != 0)
-	{
-		ret = get_next_line(fd, line);
+	//while (ret != 0)
+	//{
+		get_next_line(fd, line);
+		printf("strcmp1 == %d\n", strcmp(*line, "abcd"));
+		get_next_line(fd, line);
+		printf("strcmp2 == %d\n", strcmp(*line, "efgh"));
 		printf("%s %d", *line, ret);
-	}
+	//}
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
