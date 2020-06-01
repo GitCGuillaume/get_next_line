@@ -5,7 +5,7 @@
 int		ft_open_fd(void)
 {
 	int fd;
-	fd = open("43.txt", O_APPEND | S_IRWXU);
+	fd = open("42", O_APPEND | S_IRWXU);
 	if (fd == -1)
 	{
 		printf("L'ouverture n'a pu se faire, vérifiez si fichier existe ou les droits");
@@ -80,6 +80,7 @@ int main(void)
 		ret = get_next_line(fd, line);
 		printf("%s %d", *line, ret);
 	}
+	printf("\n");
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
