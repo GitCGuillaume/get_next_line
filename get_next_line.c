@@ -6,7 +6,7 @@
 /*   By: gchopin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 09:31:44 by gchopin           #+#    #+#             */
-/*   Updated: 2020/06/03 19:49:59 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/06/03 20:50:40 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		get_last_n(char **line, char **m_line, int *res)
 	if (!*m_line || (*m_line)[0] == '\0')
 	{
 		if (!(*m_line = ft_substr(*line, 0, ft_len(*line))))
-			return (clear_memory(m_line));
+			return (clear_memory(line));
 	}
 	else
 	{
@@ -109,7 +109,7 @@ int		get_next_line(int fd, char **line)
 		return (get_last_n(line, &mem_line[fd], &res));
 	res = read_line(fd, line);
 	if (res == -1)
-		clear_memory(line);
+		return (clear_memory(mem_line));
 	if (mem_line[fd] && mem_line[fd][0] != 0 && !ft_strchr(mem_line[fd], '\n'))
 	{
 		if (!(mem_tmp = ft_strjoin(mem_line[fd], *line)))
