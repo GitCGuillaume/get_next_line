@@ -6,12 +6,11 @@
 /*   By: gchopin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 09:31:44 by gchopin           #+#    #+#             */
-/*   Updated: 2020/06/03 20:50:40 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/06/05 20:14:59 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 int		clear_memory(char **str, int type)
 {
@@ -36,7 +35,7 @@ int		clear_memory(char **str, int type)
 	return (-1);
 }
 
-int		length_line(char *str, int *res)
+int		l_line(char *str, int *res)
 {
 	size_t i;
 
@@ -74,12 +73,12 @@ int		get_last_n(char **line, char **m_line, int *res)
 		return (clear_memory(m_line, 0));
 	free(*line);
 	*line = mem_tmp;
-	if (!(mem_tmp = ft_substr(*m_line, length_line(*m_line, res), ft_len(*m_line))))
+	if (!(mem_tmp = ft_substr(*m_line, l_line(*m_line, res), ft_len(*m_line))))
 		return (clear_memory(m_line, 0));
 	free(*m_line);
 	*m_line = mem_tmp;
-	if ((*m_line)[0] == 0 ||*res == -1 ||*res == 0)
-		clear_memory(m_line, 0);
+	if ((*m_line)[0] == 0 || *res == -1 || *res == 0)
+		clear_memory(m_line, 1);
 	return (*res);
 }
 
@@ -101,17 +100,12 @@ int		read_line(int fd, char **line, char **mem_line)
 	}
 	if (ret == -1)
 		return (clear_memory(mem_line, 0));
-	/*if (!(*line)[0] || !ft_strchr(*line, '\n'))
-	{
-		//clear_memory(mem_line, 0);
-		return (0);
-	}*/
 	return (ret);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*m_line[9999];
+	static char	*m_line[OPEN_MAX];
 	char		*mem_tmp;
 	int			res;
 
