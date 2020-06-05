@@ -7,7 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 09:31:44 by gchopin           #+#    #+#             */
 /*   Updated: 2020/06/03 20:50:40 by gchopin          ###   ########.fr       */
-/*                                                    -                        */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
@@ -101,11 +101,11 @@ int		read_line(int fd, char **line, char **mem_line)
 	}
 	if (ret == -1)
 		return (clear_memory(mem_line, 0));
-	if (!(*line)[0] || !ft_strchr(*line, '\n'))
+	/*if (!(*line)[0] || !ft_strchr(*line, '\n'))
 	{
-		clear_memory(mem_line, 0);
+		clear_memory(mem_line, 1);
 		return (0);
-	}
+	}*/
 	return (ret);
 }
 
