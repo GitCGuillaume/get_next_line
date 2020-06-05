@@ -7,7 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 09:31:44 by gchopin           #+#    #+#             */
 /*   Updated: 2020/06/03 20:50:40 by gchopin          ###   ########.fr       */
-/*                                                                            */
+/*                                                    -                        */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
@@ -32,7 +32,6 @@ int		clear_memory(char **str, int type)
 	{
 		free(*str);
 		*str = NULL;
-		return (0);
 	}
 	return (-1);
 }
@@ -68,19 +67,19 @@ int		get_last_n(char **line, char **m_line, int *res)
 	else
 	{
 		if (!(mem_tmp = ft_substr(*m_line, 0, ft_len(*m_line))))
-			return (clear_memory(m_line, 1));
+			return (clear_memory(m_line, 0));
 		free(*m_line);
 		*m_line = mem_tmp;
 	}
 	if (!(tmp = ft_strdup(*m_line)))
-		return (clear_memory(m_line, 1));
-	if (!(*m_line = ft_substr(*m_line,
-					length_line(*m_line, res), ft_len(*m_line))))
-		return (clear_memory(m_line, 1));
+		return (clear_memory(m_line, 0));
 	free(*line);
 	*line = tmp;
-	if (m_line && (*m_line)  && (*m_line)[0] == 0)
-		clear_memory(m_line, 1);	
+	if (!(*m_line = ft_substr(*m_line,
+					length_line(*m_line, res), ft_len(*m_line))))
+		return (clear_memory(m_line, 0));
+	if ((*m_line)[0] == 0 ||*res == -1 ||*res == 0)
+		clear_memory(m_line, 0);
 	return (*res);
 }
 
@@ -103,7 +102,10 @@ int		read_line(int fd, char **line, char **mem_line)
 	if (ret == -1)
 		return (clear_memory(mem_line, 0));
 	if (!(*line)[0] || !ft_strchr(*line, '\n'))
+	{
+		clear_memory(mem_line, 0);
 		return (0);
+	}
 	return (ret);
 }
 
