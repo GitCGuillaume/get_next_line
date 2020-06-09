@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 17:05:14 by gchopin           #+#    #+#             */
-/*   Updated: 2020/06/09 17:05:15 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/06/09 17:09:09 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		read_line(int fd, char **line, char **mem_line)
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*m_line[9999];
+	static char	*m_line[OPEN_MAX];
 	char		*mem_tmp;
 	int			res;
 
