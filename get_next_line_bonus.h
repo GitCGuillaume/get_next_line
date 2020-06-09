@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchopin </var/mail/gchopin>                +#+  +:+       +#+        */
+/*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/09 16:55:15 by gchopin           #+#    #+#             */
-/*   Updated: 2020/06/09 16:55:18 by gchopin          ###   ########.fr       */
+/*   Created: 2020/06/09 17:06:14 by gchopin           #+#    #+#             */
+/*   Updated: 2020/06/09 17:06:39 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
