@@ -111,7 +111,6 @@ int		get_next_line(int fd, char **line)
 
 	if (BUFFER_SIZE < 1 || fd < 0 || !line)
 		return (-1);
-	free(*line);
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);
 	*line[0] = '\0';
