@@ -121,7 +121,7 @@ int		get_next_line(int fd, char **line)
 	{
 		if (m_line[fd] && m_line[fd][0] != 0 && !ft_strchr(m_line[fd], '\n'))
 		{
-			if (!(mem_tmp = ft_strjoin2(m_line[fd], *line)))
+			if (!(mem_tmp = ft_strjoin(m_line[fd], *line)))
 			{
 				clear_memory(line, 1);
 				return (clear_memory(&m_line[fd], 0));
