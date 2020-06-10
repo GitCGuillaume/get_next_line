@@ -19,7 +19,7 @@ int		clear_memory(char **str, int type)
 	i = 0;
 	if (type == 0)
 	{
-		while (9999 > i)
+		while (str[i])
 		{
 			free(str[i]);
 			str[i] = NULL;
