@@ -19,7 +19,7 @@ int		clear_memory(char **str, int type)
 	i = 0;
 	if (type == 0)
 	{
-		while (str[i])
+		while (9999 > i)
 		{
 			free(str[i]);
 			str[i] = NULL;
@@ -87,7 +87,10 @@ int		read_line(int fd, char **line, char **mem_line)
 	char	buff[BUFFER_SIZE + 1];
 	char	*tmp;
 	int		ret;
-
+	
+	if (!(*line = malloc(sizeof(char))))
+		return (-1);
+	*line[0] = '\0';
 	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
 		buff[ret] = '\0';
@@ -111,9 +114,6 @@ int		get_next_line(int fd, char **line)
 
 	if (BUFFER_SIZE < 1 || fd < 0 || !line)
 		return (-1);
-	if (!(*line = malloc(sizeof(char))))
-		return (-1);
-	*line[0] = '\0';
 	if (m_line[fd] && m_line[fd][0] != 0 && ft_strchr(m_line[fd], '\n') != 0)
 		return (get_last_n(line, &m_line[fd], &res));
 	res = read_line(fd, line, &m_line[fd]);
@@ -121,8 +121,11 @@ int		get_next_line(int fd, char **line)
 	{
 		if (m_line[fd] && m_line[fd][0] != 0 && !ft_strchr(m_line[fd], '\n'))
 		{
-			if (!(mem_tmp = ft_strjoin(m_line[fd], *line)))
-				return (clear_memory(m_line, 0));
+			if (!(mem_tmp = ft_strjoin2(m_line[fd], *line)))
+			{
+				clear_memory(line, 1);
+				return (clear_memory(&m_line[fd], 0));
+			}
 			free(m_line[fd]);
 			m_line[fd] = mem_tmp;
 		}
