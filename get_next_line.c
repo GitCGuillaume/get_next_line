@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 17:05:14 by gchopin           #+#    #+#             */
-/*   Updated: 2020/06/12 19:32:25 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/06/12 19:41:58 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		read_line(int fd, char **line, char **mem_line)
 	char	buff[BUFFER_SIZE + 1];
 	char	*tmp;
 	int		ret;
-	
+
 	free(*line);
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);

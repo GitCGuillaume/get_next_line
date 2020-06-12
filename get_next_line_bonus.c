@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 17:05:14 by gchopin           #+#    #+#             */
-/*   Updated: 2020/06/09 17:09:09 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/06/12 19:45:12 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int		read_line(int fd, char **line, char **mem_line)
 	char	buff[BUFFER_SIZE + 1];
 	char	*tmp;
 	int		ret;
-	
+
+	free(*line);
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);
 	*line[0] = '\0';
@@ -114,6 +115,7 @@ int		get_next_line(int fd, char **line)
 
 	if (BUFFER_SIZE < 1 || fd < 0 || !line)
 		return (-1);
+	*line = NULL;
 	if (m_line[fd] && m_line[fd][0] != 0 && ft_strchr(m_line[fd], '\n') != 0)
 		return (get_last_n(line, &m_line[fd], &res));
 	res = read_line(fd, line, &m_line[fd]);
