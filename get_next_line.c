@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/28 23:35:16 by gchopin           #+#    #+#             */
+/*   Updated: 2020/07/29 01:03:56 by gchopin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 int		clear_memory(char **str, char **str_two, int type)
@@ -45,32 +57,32 @@ int		len_n(char *str, int *res)
 	return (i);
 }
 
-int		get_last_n(char **line, char **m_line, int *res, int fd)
+int		get_last_n(char **line, char **m_ln, int *res, int fd)
 {
-	char	*mem_tmp;
+	char	*m_tmp;
 
-	if (!m_line[fd] || m_line[fd][0] == '\0')
+	if (!m_ln[fd] || m_ln[fd][0] == '\0')
 	{
-		if (!(mem_tmp = ft_substr(*line, 0, ft_len(*line))))
+		if (!(m_tmp = ft_substr(*line, 0, ft_len(*line))))
 			return (clear_memory(line, 0, 1));
 	}
 	else
 	{
-		if (!(mem_tmp = ft_substr(m_line[fd], 0, ft_len(m_line[fd]))))
-			return (clear_memory(line, m_line, 1));
+		if (!(m_tmp = ft_substr(m_ln[fd], 0, ft_len(m_ln[fd]))))
+			return (clear_memory(line, m_ln, 1));
 	}
-	free(m_line[fd]);
-	m_line[fd] = mem_tmp;
-	if (!(mem_tmp = ft_strdup(m_line[fd])))
-		return (clear_memory(line, m_line, 1));
+	free(m_ln[fd]);
+	m_ln[fd] = m_tmp;
+	if (!(m_tmp = ft_strdup(m_ln[fd])))
+		return (clear_memory(line, m_ln, 1));
 	free(*line);
-	*line = mem_tmp;
-	if (!(mem_tmp = ft_substr(m_line[fd], len_n(m_line[fd], res), ft_len(m_line[fd]))))
-		return (clear_memory(line, m_line, 1));
-	free(m_line[fd]);
-	m_line[fd] = mem_tmp;
-	if (m_line[fd][0] == 0 || *res == -1 || *res == 0)
-		clear_memory(&m_line[fd], 0, 1);
+	*line = m_tmp;
+	if (!(m_tmp = ft_substr(m_ln[fd], len_n(m_ln[fd], res), ft_len(m_ln[fd]))))
+		return (clear_memory(line, m_ln, 1));
+	free(m_ln[fd]);
+	m_ln[fd] = m_tmp;
+	if (m_ln[fd][0] == 0 || *res == -1 || *res == 0)
+		clear_memory(&m_ln[fd], 0, 1);
 	return (*res);
 }
 
