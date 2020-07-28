@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/28 23:36:41 by gchopin           #+#    #+#             */
-/*   Updated: 2020/07/29 00:10:12 by gchopin          ###   ########.fr       */
+/*   Created: 2020/07/29 01:24:28 by gchopin           #+#    #+#             */
+/*   Updated: 2020/07/29 01:24:35 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		clear_memory(char **str, char **str_two, int type)
 		free(*str);
 		*str = NULL;
 	}
-	while (OPEN_MAX > i)
+	while (str_two != 0 && OPEN_MAX + 1 > i)
 	{
 		if (str && type == 0)
 		{
@@ -114,7 +114,7 @@ int		read_line(int fd, char **line, char **mem_line)
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*m_line[OPEN_MAX];
+	static char	*m_line[OPEN_MAX + 1];
 	char		*mem_tmp;
 	int			res;
 
