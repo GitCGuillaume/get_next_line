@@ -2,16 +2,44 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
+void	ft_putstr_fd(char *s, int fd);
+
 int		ft_open_fd(void)
 {
 	int fd;
-	fd = open("42", O_APPEND | S_IRWXU);
+	fd = open("42", O_RDONLY);
 	if (fd == -1)
 	{
 		printf("L'ouverture n'a pu se faire, vérifiez si fichier existe ou les droits");
 	}
 	return (fd);
 }
+
+int		ft_open_fd2(void)
+{
+	int fd;
+	fd = open("43", O_RDONLY);
+	if (fd == -1)
+	{
+		printf("L'ouverture n'a pu se faire, vérifiez si fichier existe ou les droits");
+	}
+	return (fd);
+}
+int		ft_open_fd3(void)
+{
+	int fd;
+	fd = open("bible2.txt", O_APPEND | O_WRONLY);
+	if (fd == -1)
+	{
+		printf("L'ouverture n'a pu se faire, vérifiez si fichier existe ou les droits");
+	}
+	char end;
+
+	end = '\0';
+	write (fd, &end, 1);
+	return (fd);
+}
+
 
 int		ft_close_fd(int fd)
 {
@@ -47,7 +75,7 @@ int main(void)
 	free(str);*/
 	//placer macro dans get_next_line.h
 	//static int buffer = BUFFER_SIZE;
-	char **line;
+	char *line;
 	int ret;
 	//int fd;
 
@@ -70,17 +98,51 @@ int main(void)
 	//ret = get_next_line(p[0], &line);
 	free(line);
 	*///printf("ret == %d\n", ret);
-	ret = -1;
+	ret = 1;
 	int fd;
-	if (!(line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
-		return (0);
+	int fd2;
+	int fd3;
+	int ret2;
+	//if (!(line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
+	//	return (0);
+	line = NULL;
 	fd = ft_open_fd();
-	while (ret != 0)
+	fd2 = ft_open_fd2();
+	fd3 = ft_open_fd();
+	//ft_open_fd3();
+	char n;
+	n = '\n';
+	ret2 = -10;
+	while (ret != 0 && ret != -1)
 	{
-		ret = get_next_line(fd, line);
-		printf("%s %d", *line, ret);
+		ret = get_next_line(fd, &line);
+		printf("%s", line);
+		free(line);
+		if (ret2 == -10)
+		{
+			ret2 = get_next_line(fd2, &line);
+			printf("%s", line);
+			free(line);
+			if (ret2 == 1)
+				printf("\n");
+		}
+		if (ret == 1)
+			printf("\n");
+		//ft_putstr_fd(line, fd2);
+		//if (ret == 1)
+		//	write(fd2, &n, 1);
 	}
-	printf("\n");
+	while (ret2 != 0 && ret2 != -1)
+	{
+		ret2 = get_next_line(fd2, &line);
+		printf("%s", line);
+		free(line);
+		if (ret2 == 1)
+			printf("\n");
+
+	}
+	//free(line);
+//	printf("\n");
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
@@ -89,6 +151,7 @@ int main(void)
 //	get_next_line(fd, line);
 	if (fd != -1)
 		ft_close_fd(fd);
-	free(line);
+	if (fd2 != -1)
+		ft_close_fd(fd2);
 	return (0);
 }

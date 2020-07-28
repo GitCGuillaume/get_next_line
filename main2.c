@@ -3,7 +3,7 @@
 #include "get_next_line.h"
 int main(void)
 {
-	char 	**line;
+	char 	*line;
 	int		out;
 	int		p[2];
 	int		gnl_ret;
@@ -11,22 +11,37 @@ int main(void)
 	out = dup(1);
 	pipe(p);
 	dup2(p[1], 1);
-	write(1, "azsdfsfd\nsdf\ndfert", 19);
+	write(1, "azsdfsfd\nskf\ndfert", 19);
+	//write(1, NULL, 1);
 	close(p[1]);
 	dup2(out, 1);
 	gnl_ret = 1;
 	printf("\n------------\n");
-	if (!(line = malloc(sizeof(char) * 10)))
-		return (0);
-	while (gnl_ret != 0)
+	//if (!(line = malloc(sizeof(char) * 10)))
+	//	return (0);
+	//while (gnl_ret != 0 && gnl_ret != -1)
+	while ((gnl_ret = get_next_line(p[0], &line)) > 0)
 	{
-		gnl_ret = get_next_line(p[0], line);
-		printf("strcmp==%s", *line);
-		free(*line);
-		//printf("ret==%d\n", gnl_ret);
+		//gnl_ret = get_next_line(p[0], &line);
+		printf("strcmp==%s", line);
+		free(line);
+		printf("ret==%d\n", gnl_ret);
 	}
-	printf("\n------------\n");
+	printf("strcmp==%s", line);
+	printf("ret==%d\n", gnl_ret);
+	free(line);
+	//while (gnl_ret != 0 && gnl_ret != -1)
+	//{
+		/*gnl_ret = get_next_line(p[0], &line);
+		printf("strcmp==%s", line);
+		free(line);
+		printf("ret==%d\n", gnl_ret);
+		*/
+	//}
+
+	//free(line);
+	//printf("\n------------\n");
 	//mt_assert(strcmp(line, str) == 0)
 	//mt_assert(gnl_ret == 0 || gnl_ret == 1);
-	free(line);
+	return (0);
 }
