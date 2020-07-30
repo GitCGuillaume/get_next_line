@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:24:28 by gchopin           #+#    #+#             */
-/*   Updated: 2020/07/29 01:24:35 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/07/30 13:18:50 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int		read_line(int fd, char **line, char **mem_line)
 			break ;
 	}
 	if (ret == -1)
-		return (clear_memory(0, mem_line, 0));
+		return (clear_memory(line, mem_line, 1));
 	return (ret);
 }
 
