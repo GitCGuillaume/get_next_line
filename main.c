@@ -106,23 +106,36 @@ int main(void)
 	//	return (0);
 	line = NULL;
 	int j = 0;
-	while (1020 > j)
+	while (510 > j)
 	{
+		printf("j=%d", j);
 		fd = ft_open_fd();
 		j++;
-	}
-	fd2 = ft_open_fd2();
-	//fd3 = ft_open_fd();
-	//ft_open_fd3();
-	char n;
-	n = '\n';
-	ret2 = -10;
-	while (ret != 0 && ret != -1)
-	{
-		ret = get_next_line(fd, &line);
-		printf("%s", line);
-		free(line);
-		if (ret2 == -10)
+		if (fd != -1)
+			fd2 = ft_open_fd2();
+		char n;
+		n = '\n';
+		ret2 = -10;
+		while (ret != 0 && ret != -1)
+		{
+			ret = get_next_line(fd, &line);
+			printf("%s", line);
+			free(line);
+			if (ret2 == -10)
+			{
+				ret2 = get_next_line(fd2, &line);
+				printf("%s", line);
+				free(line);
+				if (ret2 == 1)
+					printf("\n");
+			}
+			if (ret == 1)
+				printf("\n");
+			//ft_putstr_fd(line, fd2);
+			//if (ret == 1)
+			//	write(fd2, &n, 1);
+		}
+		while (ret2 != 0 && ret2 != -1)
 		{
 			ret2 = get_next_line(fd2, &line);
 			printf("%s", line);
@@ -130,22 +143,44 @@ int main(void)
 			if (ret2 == 1)
 				printf("\n");
 		}
-		if (ret == 1)
-			printf("\n");
-		//ft_putstr_fd(line, fd2);
-		//if (ret == 1)
-		//	write(fd2, &n, 1);
 	}
-	while (ret2 != 0 && ret2 != -1)
-	{
-		ret2 = get_next_line(fd2, &line);
-		printf("%s", line);
-		free(line);
-		if (ret2 == 1)
-			printf("\n");
+		fd = ft_open_fd();
+		j++;
+		char n;
+		n = '\n';
+		ret2 = -10;
+		while (ret != 0 && ret != -1)
+		{
+			ret = get_next_line(fd, &line);
+			printf("%s", line);
+			free(line);
+			if (ret2 == -10)
+			{
+				ret2 = get_next_line(fd2, &line);
+				printf("%s", line);
+				free(line);
+				if (ret2 == 1)
+					printf("\n");
+			}
+			if (ret == 1)
+				printf("\n");
+			//ft_putstr_fd(line, fd2);
+			//if (ret == 1)
+			//	write(fd2, &n, 1);
+		}
+		/*while (ret2 != 0 && ret2 != -1)
+		{
+			ret2 = get_next_line(fd2, &line);
+			printf("%s", line);
+			free(line);
+			if (ret2 == 1)
+				printf("\n");
+		}*/
+	
 
-	}
-	//free(line);
+	//fd3 = ft_open_fd();
+	//ft_open_fd3();
+		//free(line);
 //	printf("\n");
 	//get_next_line(fd, line);
 	//get_next_line(fd, line);
@@ -153,9 +188,14 @@ int main(void)
 //	get_next_line(fd, line);
 //	get_next_line(fd, line);
 //	get_next_line(fd, line);
-	if (fd != -1)
-		ft_close_fd(fd);
-	if (fd2 != -1)
-		ft_close_fd(fd2);
+	while (j != 0)
+	{
+		if (fd != -1)
+			ft_close_fd(fd);
+		fd--;
+		j--;
+	}
+//	if (fd2 != -1)
+//		ft_close_fd(fd2);
 	return (0);
 }
