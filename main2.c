@@ -1,14 +1,12 @@
-//#include <project.h>
 #include <stdio.h>
 #include "get_next_line.h"
 int main(void)
 {
 	char 	*line;
-	int	fd = 10000;
+	int	fd = 1;
 	int		out = dup(fd);
 	int		p[2];
 	int		gnl_ret;
-	printf("open_max=%d\n", OPEN_MAX);
 	pipe(p);
 	dup2(p[1], fd);
 	write(fd, "azsdfsfd\nskf\ndfert", 19);
@@ -30,13 +28,14 @@ int main(void)
 	printf("strcmp==%s", line);
 	printf("ret==%d\n", gnl_ret);
 	free(line);*/
-	/*while (gnl_ret != 0 && gnl_ret != -1)
+	printf("p0 %d", p[0]);
+	while (gnl_ret != 0 && gnl_ret != -1)
 	{
 		gnl_ret = get_next_line(p[0], &line);
 		printf("strcmp==%s", line);
 		free(line);
 		printf("ret==%d\n", gnl_ret);
-	}*/
+	}
 	get_next_line(p[0], &line);
 	//free(line);
 	//printf("\n------------\n");

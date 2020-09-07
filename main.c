@@ -8,6 +8,7 @@ int		ft_open_fd(void)
 {
 	int fd;
 	fd = open("42", O_RDONLY);
+	printf("fd1=%d\n", fd);
 	if (fd == -1)
 	{
 		printf("L'ouverture n'a pu se faire, vérifiez si fichier existe ou les droits");
@@ -19,6 +20,7 @@ int		ft_open_fd2(void)
 {
 	int fd;
 	fd = open("43", O_RDONLY);
+	printf("fd2=%d\n", fd);
 	if (fd == -1)
 	{
 		printf("L'ouverture n'a pu se faire, vérifiez si fichier existe ou les droits");
@@ -57,7 +59,6 @@ int main(void)
 	int		p[2];
 	char 	*str;
 	int		len = 50;
-
 	str = (char *)malloc(1000 * 1000);
 	*str = '\0';
 	while (len--)
@@ -81,11 +82,9 @@ int main(void)
 
 	/*int out;
 	int p[2];
-
 	//ret = 1;
 	out = dup(1);
 	pipe(p);
-
 	fd = 1;
 	dup2(p[1], fd);
 	write(fd, "efghijkl", 8);
@@ -101,14 +100,19 @@ int main(void)
 	ret = 1;
 	int fd;
 	int fd2;
-	int fd3;
+	//int fd3;
 	int ret2;
 	//if (!(line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
 	//	return (0);
 	line = NULL;
-	fd = ft_open_fd();
+	int j = 0;
+	while (1020 > j)
+	{
+		fd = ft_open_fd();
+		j++;
+	}
 	fd2 = ft_open_fd2();
-	fd3 = ft_open_fd();
+	//fd3 = ft_open_fd();
 	//ft_open_fd3();
 	char n;
 	n = '\n';

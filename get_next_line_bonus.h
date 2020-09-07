@@ -1,17 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/28 23:36:58 by gchopin           #+#    #+#             */
-/*   Updated: 2020/07/28 23:37:20 by gchopin          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>

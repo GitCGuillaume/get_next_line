@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 23:35:16 by gchopin           #+#    #+#             */
-/*   Updated: 2020/07/30 13:18:19 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/07/30 13:16:59 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		clear_memory(char **str, char **str_two, int type)
 		free(*str);
 		*str = NULL;
 	}
-	while (str_two != 0 && OPEN_MAX + 1 > i)
+	while (str_two != 0 && 10241 > i)
 	{
 		if (str && type == 0)
 		{
@@ -88,7 +88,7 @@ int		get_last_n(char **line, char **m_ln, int *res, int fd)
 
 int		read_line(int fd, char **line, char **mem_line)
 {
-	char	buff[BUFFER_SIZE + 1];
+	char	buff[10241];
 	char	*tmp;
 	int		ret;
 
@@ -114,7 +114,7 @@ int		read_line(int fd, char **line, char **mem_line)
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*m_line[OPEN_MAX + 1];
+	static char	*m_line[10241];
 	char		*mem_tmp;
 	int			res;
 
