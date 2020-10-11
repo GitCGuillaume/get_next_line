@@ -37,7 +37,7 @@ int main(void)
 		printf("ret==%d\n", gnl_ret);
 	}
 	get_next_line(p[0], &line);
-	//free(line);
+	free(line);
 	//printf("\n------------\n");
 	//mt_assert(strcmp(line, str) == 0)
 	//mt_assert(gnl_ret == 0 || gnl_ret == 1);

@@ -98,6 +98,7 @@ int main(void)
 	free(line);
 	*///printf("ret == %d\n", ret);
 	ret = 1;
+	int test[200];
 	int fd;
 	int fd2;
 	//int fd3;
@@ -106,43 +107,49 @@ int main(void)
 	//	return (0);
 	line = NULL;
 	int j = 0;
-	while (127 > j)
+	while (5 > j)
 	{
-		printf("j=%d", j);
+		ret = 1;
 		fd = ft_open_fd();
-		j++;
-		if (fd != -1)
+		test[j] = fd;
+		if (test[j] != -1)
 		{
-			fd2 = ft_open_fd2();
+			printf("j=%d fd = %d ret = %d", j, test[j], ret);
 			char n;
 			n = '\n';
-			ret2 = -10;
 			while (ret != 0 && ret != -1)
 			{
-				ret = get_next_line(fd, &line);
+				ret = get_next_line(test[j], &line);
 				printf("%s", line);
 				free(line);
-				if (ret2 == -10)
+				fd2 = ft_open_fd2();
+				ret2 = 1;
+				while (ret2 != 0 && ret2 != -1)
 				{
 					ret2 = get_next_line(fd2, &line);
-					printf("%s", line);
+					printf("ret2 = %d %s", ret, line);
 					free(line);
 					if (ret2 == 1)
 						printf("\n");
-				}			
+				}
 				if (ret == 1)
 					printf("\n");
-			//ft_putstr_fd(line, fd2);
-			//if (ret == 1)
-			//	write(fd2, &n, 1);
+				if (fd2 != -1)
+					ft_close_fd(fd2);
 			}
+			j++;
 		}
-		if (fd != -1)
-			ft_close_fd(fd);
-		if (fd2 != -1)
-			ft_close_fd(fd2);
 	}
-		/*while (ret2 != 0 && ret2 != -1)
+	printf("\n");
+	while (j != 0)
+	{
+		j--;
+		if (test[j] != -1)
+		{
+				printf("will be close = %d ", test[j]);
+				ft_close_fd(test[j]);
+		}
+	}	/*while (ret2 != 0 && ret2 != -1)
 		{
 			ret2 = get_next_line(fd2, &line);
 			printf("%s", line);
@@ -167,6 +174,5 @@ int main(void)
 		if (fd != -1)
 			ft_close_fd(fd);
 	}*/
-	getchar();
 	return (0);
 }
