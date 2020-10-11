@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 23:36:16 by gchopin           #+#    #+#             */
-/*   Updated: 2020/07/28 23:36:18 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/10/11 18:54:09 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char	*ft_strdup(const char *s1)
 	j = 0;
 	while (s1[j] != '\0' && s1[j] != '\n')
 		j++;
-	if (!(ptr_char = malloc(j + 1)))
+	ptr_char = malloc(j + 1);
+	if (ptr_char == NULL)
 		return (NULL);
 	while (s1[i] != '\0' && s1[i] != '\n')
 	{
@@ -53,8 +54,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	if (!s1 || !s2)
 		return (NULL);
-	if (!(ptr = malloc((sizeof(char const *) * ft_len((char *)s1))
-					+ (sizeof(char const *) * ft_len((char *)s2)) + 1)))
+	ptr = malloc((sizeof(char const *) * ft_len((char *)s1))
+			+ (sizeof(char const *) * ft_len((char *)s2)) + 1);
+	if (ptr == NULL)
 		return (NULL);
 	while (s1[i])
 	{
@@ -79,7 +81,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0;
 	if (!s)
 		return (NULL);
-	if (!(ptr = malloc((sizeof(char) * len) + 1)))
+	ptr = malloc((sizeof(char) * len) + 1);
+	if (ptr == NULL)
 		return (NULL);
 	if (ft_len(s) < start)
 	{

@@ -107,7 +107,7 @@ int main(void)
 	//	return (0);
 	line = NULL;
 	int j = 0;
-	while (5 > j)
+	while (200 > j)
 	{
 		ret = 1;
 		fd = ft_open_fd();
