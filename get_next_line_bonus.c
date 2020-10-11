@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/07 15:39:43 by gchopin           #+#    #+#             */
+/*   Updated: 2020/10/11 11:21:01 by gchopin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 int		clear_memory(char **str, char **str_two, int type)
@@ -76,7 +88,7 @@ int		get_last_n(char **line, char **m_ln, int *res, int fd)
 
 int		read_line(int fd, char **line, char **mem_line)
 {
-	char	buff[10241];
+	char	buff[BUFFER_SIZE + 1];
 	char	*tmp;
 	int		ret;
 

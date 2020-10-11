@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 23:35:16 by gchopin           #+#    #+#             */
-/*   Updated: 2020/07/30 13:16:59 by gchopin          ###   ########.fr       */
+/*   Updated: 2020/10/11 11:20:11 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		get_last_n(char **line, char **m_ln, int *res, int fd)
 
 int		read_line(int fd, char **line, char **mem_line)
 {
-	char	buff[10241];
+	char	buff[BUFFER_SIZE + 1];
 	char	*tmp;
 	int		ret;
 
