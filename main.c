@@ -114,12 +114,12 @@ int main(void)
 		test[j] = fd;
 		if (test[j] != -1)
 		{
-			printf("j=%d fd = %d ret = %d", j, test[j], ret);
 			char n;
 			n = '\n';
 			while (ret != 0 && ret != -1)
 			{
 				ret = get_next_line(test[j], &line);
+				printf("j=%d fd = %d ret = %d", j, test[j], ret);
 				printf("%s", line);
 				free(line);
 				fd2 = ft_open_fd2();
@@ -127,7 +127,7 @@ int main(void)
 				while (ret2 != 0 && ret2 != -1)
 				{
 					ret2 = get_next_line(fd2, &line);
-					printf("ret2 = %d %s", ret, line);
+					printf("ret2 = %d %s", ret2, line);
 					free(line);
 					if (ret2 == 1)
 						printf("\n");
