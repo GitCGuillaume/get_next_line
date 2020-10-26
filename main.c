@@ -107,19 +107,19 @@ int main(void)
 	//	return (0);
 	line = NULL;
 	int j = 0;
-	while (200 > j)
-	{
+	//while (1 > j)
+	//{
 		ret = 1;
 		fd = ft_open_fd();
 		test[j] = fd;
 		if (test[j] != -1)
 		{
-			printf("j=%d fd = %d ret = %d", j, test[j], ret);
 			char n;
 			n = '\n';
 			while (ret != 0 && ret != -1)
 			{
 				ret = get_next_line(test[j], &line);
+				printf("j=%d fd = %d ret = %d", j, test[j], ret);
 				printf("%s", line);
 				free(line);
 				fd2 = ft_open_fd2();
@@ -127,7 +127,7 @@ int main(void)
 				while (ret2 != 0 && ret2 != -1)
 				{
 					ret2 = get_next_line(fd2, &line);
-					printf("ret2 = %d %s", ret, line);
+					printf("ret2 = %d %s", ret2, line);
 					free(line);
 					if (ret2 == 1)
 						printf("\n");
@@ -137,10 +137,10 @@ int main(void)
 				if (fd2 != -1)
 					ft_close_fd(fd2);
 			}
-			j++;
 		}
-	}
+			j++;
 	printf("\n");
+	//}
 	while (j != 0)
 	{
 		j--;
