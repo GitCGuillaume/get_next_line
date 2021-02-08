@@ -38,6 +38,7 @@ int main(void)
 	}
 	get_next_line(p[0], &line);
 	free(line);
+	getchar();
 	//printf("\n------------\n");
 	//mt_assert(strcmp(line, str) == 0)
 	//mt_assert(gnl_ret == 0 || gnl_ret == 1);

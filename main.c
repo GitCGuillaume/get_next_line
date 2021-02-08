@@ -1,6 +1,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include "get_next_line.h"
+#include <limits.h>
 
 void	ft_putstr_fd(char *s, int fd);
 
@@ -98,17 +99,17 @@ int main(void)
 	free(line);
 	*///printf("ret == %d\n", ret);
 	ret = 1;
-	int test[200];
+	int test[20000];
 	int fd;
 	int fd2;
 	//int fd3;
 	int ret2;
 	//if (!(line = malloc(sizeof(char *) * BUFFER_SIZE + 1)))
 	//	return (0);
-	line = NULL;
 	int j = 0;
-	//while (1 > j)
-	//{
+	while (253 > j)
+	{
+		line = NULL;
 		ret = 1;
 		fd = ft_open_fd();
 		test[j] = fd;
@@ -116,19 +117,24 @@ int main(void)
 		{
 			char n;
 			n = '\n';
+			int x = 0;
 			while (ret != 0 && ret != -1)
 			{
 				ret = get_next_line(test[j], &line);
 				printf("j=%d fd = %d ret = %d", j, test[j], ret);
 				printf("%s", line);
-				free(line);
+				if (line)
+					free(line);
+				line = NULL;
 				fd2 = ft_open_fd2();
 				ret2 = 1;
 				while (ret2 != 0 && ret2 != -1)
 				{
 					ret2 = get_next_line(fd2, &line);
 					printf("ret2 = %d %s", ret2, line);
-					free(line);
+					if (line)
+						free(line);
+					line = NULL;
 					if (ret2 == 1)
 						printf("\n");
 				}
@@ -138,9 +144,9 @@ int main(void)
 					ft_close_fd(fd2);
 			}
 		}
-			j++;
-	printf("\n");
-	//}
+		j++;
+		printf("\n");
+	}
 	while (j != 0)
 	{
 		j--;
@@ -174,5 +180,7 @@ int main(void)
 		if (fd != -1)
 			ft_close_fd(fd);
 	}*/
+	printf("open_max=%d", OPEN_MAX);
+	getchar();
 	return (0);
 }
