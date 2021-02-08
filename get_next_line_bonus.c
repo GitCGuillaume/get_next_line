@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:39:43 by gchopin           #+#    #+#             */
-/*   Updated: 2020/10/11 20:01:13 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/02/08 18:50:28 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	get_next_line(int fd, char **line)
 	char		*mem_tmp;
 	int			res;
 
-	if (BUFFER_SIZE < 1 || fd < 0 || !line)
+	if (BUFFER_SIZE < 1 || fd < 0 || fd > 10240 || !line)
 		return (-1);
 	*line = NULL;
 	if (m_line[fd] && m_line[fd][0] != 0 && ft_strchr(m_line[fd], '\n') != 0)
