@@ -17,8 +17,11 @@ size_t	ft_len(char const *str)
 	size_t	i;
 
 	i = 0;
-	while (str[i] != '\0')
-		i++;
+	if (str)
+	{
+		while (str[i] != '\0')
+			i++;
+	}
 	return (i);
 }
 
@@ -30,8 +33,15 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	j = 0;
-	while (s1[j] != '\0' && s1[j] != '\n')
-		j++;
+	if (s1)
+	{
+		while (s1[j] != '\0' && s1[j] != '\n')
+			j++;
+	}
+	else
+	{
+		return (NULL);
+	}
 	ptr_char = malloc(j + 1);
 	if (ptr_char == NULL)
 		return (NULL);
