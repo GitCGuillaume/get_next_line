@@ -1,6 +1,6 @@
 # Projet Get_next_line
 
-![gnl](https://github.com/GitCGuillaume/get_next_line/assets/34135668/67345925-93d7-4154-bf6f-ddc34242cac0)
+![gnl](https://github.com/GitCGuillaume/get_next_line/assets/34135668/211914a2-5715-401c-a52d-359ef4948a60)
 
 Projet qui consiste à lire ligne par ligne des fichiers, pour par exemple en afficher le contenu.
 
